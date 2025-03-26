@@ -6,11 +6,8 @@ interface BlogPost {
   content: string;
 }
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
+type Params = Promise<{ slug: string }>
+
 
 export async function generateStaticParams() {
   const res = await fetch("http://localhost:3000/api/blogs");
@@ -21,8 +18,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: Props) {
-  const { slug } = params;
+export default async function BlogPost({ params }: {params: Params}) {
+  const { slug } = await params;
 
   const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
     next: { revalidate: 600 }, // Revalidate the page every 10 minutes
