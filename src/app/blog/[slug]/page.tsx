@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { use } from 'react';
 
 interface BlogPost {
   title: string;
@@ -14,8 +15,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function BlogPost({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function BlogPost({ params }: { params: Promise<any> }) {
+  const { slug } = use(params);
   
   const res = await fetch(`http://localhost:3000/api/blogs/${slug}`, {
     next: { revalidate: 600 }, // Revalidate the page every 10 minutes
