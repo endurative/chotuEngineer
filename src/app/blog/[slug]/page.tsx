@@ -3,15 +3,13 @@ interface BlogPost {
   title: string;
   content: string;
 }
+type paramsType = Promise<{ slug: string }>;
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function BlogPost({ params }: { params: paramsType }) {
+  const { slug } = await params;
   const API_URL = "https://dashboard-chotu-engineer.vercel.app";
 
-  const res = await fetch(`${API_URL}/api/blogs/${params.slug}`, {
+  const res = await fetch(`${API_URL}/api/blogs/${slug}`, {
     cache: "no-store",
   });
 
