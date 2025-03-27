@@ -7,7 +7,7 @@ type paramsType = Promise<{ slug: string }>;
 
 export default async function BlogPost({ params }: { params: paramsType }) {
   const { slug } = await params;
-  const API_URL = "https://dashboard-chotu-engineer.vercel.app";
+  const API_URL = "https://www.chotuengineer.com";
 
   const res = await fetch(`${API_URL}/api/blogs/${slug}`, {
     cache: "no-store",
