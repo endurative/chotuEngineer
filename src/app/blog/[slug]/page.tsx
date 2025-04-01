@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache } from "react";
+import { cache, use } from "react";
 
 interface BlogPost {
   title: string;
@@ -26,9 +26,10 @@ const fetchBlogPost = cache(async (slug: string) => {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const post = await fetchBlogPost(params.slug);
+  const {slug} = await params;
+  const post = await fetchBlogPost(slug);
   if (!post) return {};
 
   return {
@@ -37,14 +38,14 @@ export async function generateMetadata({
     openGraph: {
       title: post.title,
       description: post.excerpt || post.content.substring(0, 160),
-      url: `https://yourdomain.com/blog/${params.slug}`,
+      url: `https://yourdomain.com/blog/${slug}`,
       type: "article",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       authors: [post.author || "Your Name"],
     },
     alternates: {
-      canonical: `https://yourdomain.com/blog/${params.slug}`,
+      canonical: `https://yourdomain.com/blog/${slug}`,
     },
     keywords: post.tags?.join(", ") || "",
   };
@@ -53,9 +54,10 @@ export async function generateMetadata({
 export default async function BlogPost({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const post = await fetchBlogPost(params.slug);
+  const {slug} = await params;
+  const post = await fetchBlogPost(slug);
   if (!post) notFound();
 
   return (
