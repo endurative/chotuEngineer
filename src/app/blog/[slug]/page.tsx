@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache, use } from "react";
+import { cache } from "react";
 
 interface BlogPost {
   title: string;
@@ -12,15 +12,13 @@ interface BlogPost {
   tags?: string[];
 }
 
-export function generateStaticParams(){
+export async function generateStaticParams(){
   return [];
 }
 
 const fetchBlogPost = cache(async (slug: string) => {
   const API_URL = "https://dashboard.chotuengineer.com";
-  const res = await fetch(`${API_URL}/api/blogs/${slug}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(`${API_URL}/api/blogs/${slug}`);
 
   if (!res.ok) return null;
   return (await res.json()) as BlogPost;
@@ -54,7 +52,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function BlogPost({
+export default async function Page({
   params,
 }: {
   params: Promise<{ slug: string }>;
