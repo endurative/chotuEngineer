@@ -12,7 +12,10 @@ interface BlogPost {
   tags?: string[];
 }
 
-// Create a cached fetch function
+export function generateStaticParams(){
+  return [];
+}
+
 const fetchBlogPost = cache(async (slug: string) => {
   const API_URL = "https://dashboard.chotuengineer.com";
   const res = await fetch(`${API_URL}/api/blogs/${slug}`, {
