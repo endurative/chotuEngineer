@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 async function fetchPagesData() {
-  const res = await fetch('http://localhost:3000/api/sitemap-items', {
+  const res = await fetch('https://dashboard.chotuengineer.com/api/sitemap-items', {
     next: { revalidate: 86400 },
   });
   if (!res.ok) {
