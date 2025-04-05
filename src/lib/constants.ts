@@ -1,1 +1,1 @@
-const APP_NAME = "<ChotuEngineer/>"
+export const APP_NAME = "<ChotuEngineer/>"

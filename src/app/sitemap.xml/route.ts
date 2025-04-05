@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 async function fetchPagesData() {
   const res = await fetch('https://dashboard.chotuengineer.com/api/sitemap-items', {
-    next: { revalidate: 86400 },
+    // next: { revalidate: 86400 },
   });
   if (!res.ok) {
     throw new Error('Failed to fetch pages data');
@@ -12,9 +12,7 @@ async function fetchPagesData() {
 
 export async function GET() {
   try {
-    const pagesData = await fetchPagesData();
-    console.log(pagesData, 'sitemData');
-    
+    const pagesData = await fetchPagesData();    
     const sitemap = generateSitemap(pagesData);
     return new NextResponse(sitemap, {
       headers: {
