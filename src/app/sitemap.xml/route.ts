@@ -2,12 +2,14 @@ import { NextResponse } from 'next/server';
 
 async function fetchPagesData() {
   const res = await fetch('https://dashboard.chotuengineer.com/api/sitemap-items', {
-    next: { revalidate: 100 },
+    next: { revalidate: 43200 },
   });
+  
   if (!res.ok) {
     throw new Error('Failed to fetch pages data');
   }
-  return res.json();
+  const data = await res.json()  
+  return data;
 }
 
 export async function GET() {
