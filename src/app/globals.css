@@ -212,3 +212,28 @@
 .blog-content figcaption {
   @apply text-sm text-gray-500 dark:text-gray-400 mt-1 italic;
 }
+
+.blog-content .ql-code-block-container {
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 1em 0;
+  overflow-x: auto;
+}
+
+.blog-content .ql-code-block-container .ql-code-block {
+  white-space: pre;
+  padding: 2px 0;
+}
+
+.blog-content  .ql-editor blockquote {
+  border-left: 4px solid #ccc;
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #666;
+  font-style: italic;
+  background-color: #fafafa;
+}
