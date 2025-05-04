@@ -1,14 +1,16 @@
 import { jwtVerify } from "jose";
 
 export const getJwtSecretKey = () => {
-  const secret = process.env.ADMIN_SECRET_PASSWORD;
+  const secret = process.env.ADMIN_EMAIL;
+  const passwordSecret = process.env.ADMIN_SECRET_PASSWORD;
 
   if (!secret || secret.length === 0) {
     throw new Error("The jwt is not set in env.");
   }
 
-  return new TextEncoder().encode(secret);
+  return new TextEncoder().encode(`${secret}${passwordSecret}`);
 };
+
 
 export const verifyAuth = async (token: string) => {
   try {
