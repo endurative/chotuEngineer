@@ -10,12 +10,11 @@ export const getJwtSecretKey = () => {
   return new TextEncoder().encode(secret);
 };
 
-
 export const verifyAuth = async (token: string) => {
-    try {
-        const verified = await jwtVerify(token, getJwtSecretKey());
-        return verified.payload;
-    } catch (error) {
-        throw new Error("Your token is expired");
-    }
-}
+  try {
+    const verified = await jwtVerify(token, getJwtSecretKey());
+    return verified.payload;
+  } catch (error) {
+    throw new Error("Your token is expired");
+  }
+};

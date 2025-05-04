@@ -18,9 +18,8 @@ export async function generateStaticParams() {
 }
 
 const fetchBlogPost = cache(async (slug: string) => {
-  const API_URL = "https://dashboard.chotuengineer.com";
-  const res = await fetch(`${API_URL}/api/blogs/${slug}`);
-
+  const API_URL = process.env.NODE_ENV === "production" ? "https://backend-ce.vercel.app/api" : "http://localhost:3001/api";
+  const res = await fetch(`${API_URL}/blog/${slug}`);
   if (!res.ok) return null;
   return (await res.json()) as BlogPost;
 });
