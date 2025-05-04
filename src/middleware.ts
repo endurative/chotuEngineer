@@ -1,7 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 const allowedOrigins = [
-  "https://www.dashbaord.chotuengineer.com",
+  "https://www.dashboard.chotuengineer.com",
+  "https://api.chotuengineer.com"
 ];
 
 export async function middleware(request: NextRequest) {
